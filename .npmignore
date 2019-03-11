@@ -1,0 +1,8 @@
+src
+.babelrc
+.editorconfig
+.git
+.gitignore
+.idea
+.mocharc.js
+.npmignore

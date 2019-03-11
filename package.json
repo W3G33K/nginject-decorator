@@ -1,0 +1,44 @@
+{
+	"name": "nginject-decorator",
+	"version": "0.1.0",
+	"description": "Simply sets a static $inject property onto a component, controller, service or filter class which specifies what dependencies AngularJS built-in $injector will need to inject at runtime and avoids mucking up module declarations with unnecessary verbosity.",
+	"main": "index.js",
+	"devDependencies": {
+		"@babel/cli": "^7.2.3",
+		"@babel/core": "^7.3.4",
+		"@babel/plugin-proposal-decorators": "^7.3.0",
+		"@babel/preset-env": "^7.3.4",
+		"@babel/register": "^7.0.0",
+		"@types/chai": "^4.1.7",
+		"chai": "^4.2.0",
+		"mocha": "^6.0.2"
+	},
+	"scripts": {
+		"build": "babel src/nginject.js -o index.js",
+		"test": "mocha",
+		"prepublish": "npm test & npm run build"
+	},
+	"author": {
+		"name": "Ryan K. Clark",
+		"email": "mail.w3geek@gmail.com",
+		"url": "https://github.com/W3G33K"
+	},
+	"homepage": "https://github.com/W3G33K/nginject-decorator#readme",
+	"license": "MIT",
+	"keywords": [
+		"AngularJS",
+		"ES6",
+		"ES7",
+		"decorator",
+		"dependency-injection",
+		"$inject",
+		"nginject"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/W3G33K/nginject-decorator.git"
+	},
+	"bugs": {
+		"url": "https://github.com/W3G33K/nginject-decorator/issues"
+	}
+}

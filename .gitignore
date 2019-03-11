@@ -1,0 +1,6 @@
+# IDE-RELATED #
+.idea/
+
+# APP-RELATED #
+index.js
+node_modules/
