@@ -1,5 +1,7 @@
 export default function NgInject(...inject) {
 	return (function(target) {
-		target.$inject = inject;
-	})
+		Object.defineProperty(target, "$inject", {
+			value: inject
+		});
+	});
 }

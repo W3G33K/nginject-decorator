@@ -1,3 +1,7 @@
+import NgController from "./ngcontroller";
 import NgInject from "./nginject";
 
-export {NgInject as default};
+export {
+	NgController,
+	NgInject as default
+};

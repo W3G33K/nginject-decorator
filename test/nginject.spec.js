@@ -1,41 +1,46 @@
 import { expect } from "chai";
 import { describe } from "mocha";
 
-import NgInject from "../src/nginject";
+import NgInject from "../src";
 
 describe("@NgInject", function() {
-	it("should decorate class with a static member of type array with no items", function() {
+	it("should exist", function() {
+		expect(NgInject).to.not.be.undefined;
+		expect(NgInject).to.be.a("function");
+	});
+
+	it("should decorate class with a static $inject property of type array with zero items", function() {
 		@NgInject()
-		class NgController {
+		class AppController {
 			constructor($scope, $http) {
 				this.$scope = $scope;
 				this.$http = $http;
 			}
 		}
 
-		expect(NgController).to.haveOwnProperty("$inject");
-		expect(NgController.$inject).to.be.a("array");
-		expect(NgController.$inject).to.be.length(0);
+		expect(AppController).to.haveOwnProperty("$inject");
+		expect(AppController.$inject).to.be.a("array");
+		expect(AppController.$inject).to.be.length(0);
 	});
 
-	it("should decorate class with a static member of type array with one item", function() {
+	it("should decorate class with a static $inject property of type array with one item", function() {
 		@NgInject("$scope")
-		class NgController {
+		class AppController {
 			constructor($scope, $http) {
 				this.$scope = $scope;
 				this.$http = $http;
 			}
 		}
 
-		expect(NgController).to.haveOwnProperty("$inject");
-		expect(NgController.$inject).to.be.a("array");
-		expect(NgController.$inject).to.be.length(1);
-		expect(NgController.$inject).to.contain("$scope");
+		expect(AppController).to.haveOwnProperty("$inject");
+		expect(AppController.$inject).to.be.a("array");
+		expect(AppController.$inject).to.be.length(1);
+		expect(AppController.$inject).to.contain("$scope");
 	});
 
-	it("should decorate class with a static member of type array with three items", function() {
+	it("should decorate class with a static $inject property of type array with three items", function() {
 		@NgInject("$scope", "$http", "$location")
-		class NgController {
+		class AppController {
 			constructor($scope, $http, $location) {
 				this.$scope = $scope;
 				this.$http = $http;
@@ -43,11 +48,27 @@ describe("@NgInject", function() {
 			}
 		}
 
-		expect(NgController).to.haveOwnProperty("$inject");
-		expect(NgController.$inject).to.be.a("array");
-		expect(NgController.$inject).to.be.length(3);
-		expect(NgController.$inject).to.contain("$http");
-		expect(NgController.$inject).to.contain("$location");
-		expect(NgController.$inject).to.contain("$scope");
+		expect(AppController).to.haveOwnProperty("$inject");
+		expect(AppController.$inject).to.be.a("array");
+		expect(AppController.$inject).to.be.length(3);
+		expect(AppController.$inject).to.contain("$http");
+		expect(AppController.$inject).to.contain("$location");
+		expect(AppController.$inject).to.contain("$scope");
+	});
+
+	it("should decorate class with a static $inject property that is read only", function() {
+		@NgInject("$scope", "$http", "$location")
+		class AppController {
+			constructor($scope, $http, $location) {
+				this.$scope = $scope;
+				this.$http = $http;
+				this.$location = $location;
+			}
+		}
+
+		expect(AppController).to.haveOwnProperty("$inject");
+		expect(function() {
+			AppController.$inject = ["myService"];
+		}).to.throw(TypeError, "Cannot assign to read only property '$inject'");
 	});
 });
