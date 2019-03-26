@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { describe } from "mocha";
 
-import NgInject from "./nginject";
+import NgInject from "../src/nginject";
 
 describe("@NgInject", function() {
 	it("should decorate class with a static member of type array with no items", function() {

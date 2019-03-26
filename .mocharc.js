@@ -6,5 +6,5 @@ module.exports = {
 	recursive: true,
 	reporter: "spec",
 	require: "@babel/register",
-	spec: "**/*.spec.js"
+	spec: "./test/**/*.spec.js"
 };

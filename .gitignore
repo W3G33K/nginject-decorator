@@ -2,5 +2,5 @@
 .idea/
 
 # APP-RELATED #
-index.js
+lib/
 node_modules/

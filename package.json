@@ -1,8 +1,8 @@
 {
 	"name": "nginject-decorator",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Simply sets a static $inject property onto a component, controller, service or filter class which specifies what dependencies AngularJS built-in $injector will need to inject at runtime and avoids mucking up module declarations with unnecessary verbosity.",
-	"main": "index.js",
+	"main": "lib/index.js",
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
 		"@babel/core": "^7.3.4",
@@ -14,9 +14,9 @@
 		"mocha": "^6.0.2"
 	},
 	"scripts": {
-		"build": "babel src/nginject.js -o index.js",
+		"build": "babel src --out-dir lib",
 		"test": "mocha",
-		"prepublish": "npm test & npm run build"
+		"prepublish": "npm test && npm run build"
 	},
 	"author": {
 		"name": "Ryan K. Clark",
