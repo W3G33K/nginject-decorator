@@ -1,6 +1,6 @@
 {
 	"name": "nginject-decorator",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "Simply sets a static $inject property onto a component, controller, service or filter class which specifies what dependencies AngularJS built-in $injector will need to inject at runtime and avoids mucking up module declarations with unnecessary verbosity.",
 	"main": "lib/index.js",
 	"devDependencies": {
