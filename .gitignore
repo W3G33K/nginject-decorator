@@ -2,5 +2,6 @@
 .idea/
 
 # APP-RELATED #
+coverage/
 lib/
 node_modules/

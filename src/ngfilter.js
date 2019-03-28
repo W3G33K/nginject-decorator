@@ -1,5 +1,5 @@
 import NgDependency from "./ngdependency";
 
-export default function NgFilter(name) {
-	return NgDependency(name, "filter");
+export default function NgFilter(simpleName) {
+	return NgDependency(simpleName, "filter");
 }

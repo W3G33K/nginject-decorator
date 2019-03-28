@@ -3,6 +3,7 @@ import NgComponent from "./ngcomponent";
 import NgController from "./ngcontroller";
 import NgFilter from "./ngfilter";
 import NgInject from "./nginject";
+import NgModule from "./ngmodule";
 import NgService from "./ngservice";
 
 export {
@@ -11,5 +12,6 @@ export {
 	NgController,
 	NgFilter,
 	NgInject as default,
+	NgModule,
 	NgService
 };

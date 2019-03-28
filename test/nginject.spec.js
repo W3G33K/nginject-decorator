@@ -1,12 +1,9 @@
-import { expect } from "chai";
-import { describe } from "mocha";
-
 import NgInject from "../src";
 
 describe("@NgInject", function() {
 	it("should exist", function() {
-		expect(NgInject).to.not.be.undefined;
-		expect(NgInject).to.be.a("function");
+		expect(NgInject).toBeDefined();
+		expect(NgInject).toEqual(jasmine.any(Function));
 	});
 
 	it("should decorate class with a static $inject property of type array with zero items", function() {
@@ -18,9 +15,9 @@ describe("@NgInject", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("$inject");
-		expect(AppController.$inject).to.be.a("array");
-		expect(AppController.$inject).to.be.length(0);
+		expect(AppController.$inject).toBeDefined();
+		expect(AppController.$inject).toEqual(jasmine.any(Array));
+		expect(AppController.$inject.length).toEqual(0);
 	});
 
 	it("should decorate class with a static $inject property of type array with one item", function() {
@@ -32,10 +29,10 @@ describe("@NgInject", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("$inject");
-		expect(AppController.$inject).to.be.a("array");
-		expect(AppController.$inject).to.be.length(1);
-		expect(AppController.$inject).to.contain("$scope");
+		expect(AppController.$inject).toBeDefined();
+		expect(AppController.$inject).toEqual(jasmine.any(Array));
+		expect(AppController.$inject.length).toEqual(1);
+		expect(AppController.$inject).toContain("$scope");
 	});
 
 	it("should decorate class with a static $inject property of type array with three items", function() {
@@ -48,12 +45,12 @@ describe("@NgInject", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("$inject");
-		expect(AppController.$inject).to.be.a("array");
-		expect(AppController.$inject).to.be.length(3);
-		expect(AppController.$inject).to.contain("$http");
-		expect(AppController.$inject).to.contain("$location");
-		expect(AppController.$inject).to.contain("$scope");
+		expect(AppController.$inject).toBeDefined();
+		expect(AppController.$inject).toEqual(jasmine.any(Array));
+		expect(AppController.$inject.length).toEqual(3);
+		expect(AppController.$inject).toContain("$http");
+		expect(AppController.$inject).toContain("$location");
+		expect(AppController.$inject).toContain("$scope");
 	});
 
 	it("should decorate class with a static $inject property that is read only", function() {
@@ -66,9 +63,14 @@ describe("@NgInject", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("$inject");
+		expect(AppController.$inject).toBeDefined();
+		expect(AppController.$inject).toEqual(jasmine.any(Array));
 		expect(function() {
-			AppController.$inject = ["myService"];
-		}).to.throw(TypeError, "Cannot assign to read only property '$inject'");
+			AppController.$inject = ["appService"];
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
+		expect(AppController.$inject.length).toEqual(3);
+		expect(AppController.$inject).toContain("$http");
+		expect(AppController.$inject).toContain("$location");
+		expect(AppController.$inject).toContain("$scope");
 	});
 });

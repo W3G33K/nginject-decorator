@@ -1,12 +1,9 @@
-import { expect } from "chai";
-import { describe } from "mocha";
-
 import NgDependency from "../src/ngdependency";
 
 describe("@NgDependency", function() {
 	it("should exist", function() {
-		expect(NgDependency).to.not.be.undefined;
-		expect(NgDependency).to.be.a("function");
+		expect(NgDependency).toBeDefined();
+		expect(NgDependency).toEqual(jasmine.any(Function));
 	});
 
 	it("should decorate class with static name and type properties", function() {
@@ -17,29 +14,29 @@ describe("@NgDependency", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("name");
-		expect(AppController).to.haveOwnProperty("type");
-		expect(AppController.name).to.be.a("string");
-		expect(AppController.type).to.be.a("string");
-		expect(AppController.name).to.be.eq("GreetingController");
-		expect(AppController.type).to.be.eq("controller");
+		expect(AppController.simpleName).toBeDefined();
+		expect(AppController.simpleType).toBeDefined();
+		expect(AppController.simpleName).toEqual("GreetingController");
+		expect(AppController.simpleType).toEqual("controller");
 	});
 
 	it("should decorate class with static name and type properties that are read only", function() {
-		@NgDependency("GreetingController", "controller")
-		class AppController {
-			constructor($scope) {
-				this.$scope = $scope;
+		@NgDependency("GreetingService", "service")
+		class AppService {
+			constructor($http) {
+				this.$scope = $http;
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("name");
-		expect(AppController).to.haveOwnProperty("type");
+		expect(AppService.simpleName).toBeDefined();
+		expect(AppService.simpleType).toBeDefined();
 		expect(function() {
-			AppController.name = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'name'");
+			AppService.simpleName = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
 		expect(function() {
-			AppController.type = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'type'");
+			AppService.simpleType = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
+		expect(AppService.simpleName).toEqual("GreetingService");
+		expect(AppService.simpleType).toEqual("service");
 	});
 });

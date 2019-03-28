@@ -1,5 +1,5 @@
 import NgDependency from "./ngdependency";
 
-export default function NgController(name) {
-	return NgDependency(name, "controller");
+export default function NgController(simpleName) {
+	return NgDependency(simpleName, "controller");
 }

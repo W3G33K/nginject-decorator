@@ -1,12 +1,18 @@
-export default function NgDependency(name, type) {
+export default function NgDependency(simpleName, simpleType) {
 	return (function(target) {
 		Object.defineProperties(target, {
-			name: {
-				value: name
+			simpleName: {
+				value: simpleName,
+				configurable: false,
+				enumerable: false,
+				writable: false
 			},
 
-			type: {
-				value: type
+			simpleType: {
+				value: simpleType,
+				configurable: false,
+				enumerable: false,
+				writable: false
 			}
 		});
 	});

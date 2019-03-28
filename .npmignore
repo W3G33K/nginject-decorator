@@ -1,9 +1,13 @@
+coverage
+karma.conf.js
 src
 test
+webpack.config.js
+webpack-prod.config.js
+webpack-test.config.js
 .babelrc
 .editorconfig
 .git
 .gitignore
 .idea
-.mocharc.js
 .npmignore

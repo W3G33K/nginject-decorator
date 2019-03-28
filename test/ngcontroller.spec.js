@@ -1,12 +1,9 @@
-import { expect } from "chai";
-import { describe } from "mocha";
-
-import { NgController } from "../src";
+import {NgController} from "../src";
 
 describe("@NgController", function() {
 	it("should exist", function() {
-		expect(NgController).to.not.be.undefined;
-		expect(NgController).to.be.a("function");
+		expect(NgController).toBeDefined();
+		expect(NgController).toEqual(jasmine.any(Function));
 	});
 
 	it("should decorate class with static name and type properties", function() {
@@ -17,12 +14,10 @@ describe("@NgController", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("name");
-		expect(AppController).to.haveOwnProperty("type");
-		expect(AppController.name).to.be.a("string");
-		expect(AppController.type).to.be.a("string");
-		expect(AppController.name).to.be.eq("GreetingController");
-		expect(AppController.type).to.be.eq("controller");
+		expect(AppController.simpleName).toBeDefined();
+		expect(AppController.simpleType).toBeDefined();
+		expect(AppController.simpleName).toEqual("GreetingController");
+		expect(AppController.simpleType).toEqual("controller");
 	});
 
 	it("should decorate class with static name and type properties that are read only", function() {
@@ -33,13 +28,15 @@ describe("@NgController", function() {
 			}
 		}
 
-		expect(AppController).to.haveOwnProperty("name");
-		expect(AppController).to.haveOwnProperty("type");
+		expect(AppController.simpleName).toBeDefined();
+		expect(AppController.simpleType).toBeDefined();
 		expect(function() {
-			AppController.name = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'name'");
+			AppController.simpleName = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
 		expect(function() {
-			AppController.type = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'type'");
+			AppController.simpleType = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
+		expect(AppController.simpleName).toEqual("GreetingController");
+		expect(AppController.simpleType).toEqual("controller");
 	});
 });

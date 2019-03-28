@@ -1,12 +1,9 @@
-import { expect } from "chai";
-import { describe } from "mocha";
-
-import { NgService } from "../src";
+import {NgService} from "../src";
 
 describe("@NgService", function() {
 	it("should exist", function() {
-		expect(NgService).to.not.be.undefined;
-		expect(NgService).to.be.a("function");
+		expect(NgService).toBeDefined();
+		expect(NgService).toEqual(jasmine.any(Function));
 	});
 
 	it("should decorate class with static name and type properties", function() {
@@ -17,12 +14,10 @@ describe("@NgService", function() {
 			}
 		}
 
-		expect(AppService).to.haveOwnProperty("name");
-		expect(AppService).to.haveOwnProperty("type");
-		expect(AppService.name).to.be.a("string");
-		expect(AppService.type).to.be.a("string");
-		expect(AppService.name).to.be.eq("GreetingService");
-		expect(AppService.type).to.be.eq("service");
+		expect(AppService.simpleName).toBeDefined();
+		expect(AppService.simpleType).toBeDefined();
+		expect(AppService.simpleName).toEqual("GreetingService");
+		expect(AppService.simpleType).toEqual("service");
 	});
 
 	it("should decorate class with static name and type properties that are read only", function() {
@@ -33,13 +28,15 @@ describe("@NgService", function() {
 			}
 		}
 
-		expect(AppService).to.haveOwnProperty("name");
-		expect(AppService).to.haveOwnProperty("type");
+		expect(AppService.simpleName).toBeDefined();
+		expect(AppService.simpleType).toBeDefined();
 		expect(function() {
-			AppService.name = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'name'");
+			AppService.simpleName = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
 		expect(function() {
-			AppService.type = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'type'");
+			AppService.simpleType = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
+		expect(AppService.simpleName).toEqual("GreetingService");
+		expect(AppService.simpleType).toEqual("service");
 	});
 });

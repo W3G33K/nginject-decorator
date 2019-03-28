@@ -1,12 +1,9 @@
-import { expect } from "chai";
-import { describe } from "mocha";
-
-import { NgComponent } from "../src";
+import {NgComponent} from "../src";
 
 describe("@NgComponent", function() {
 	it("should exist", function() {
-		expect(NgComponent).to.not.be.undefined;
-		expect(NgComponent).to.be.a("function");
+		expect(NgComponent).toBeDefined();
+		expect(NgComponent).toEqual(jasmine.any(Function));
 	});
 
 	it("should decorate class with static name and type properties", function() {
@@ -17,12 +14,10 @@ describe("@NgComponent", function() {
 			}
 		}
 
-		expect(AppComponent).to.haveOwnProperty("name");
-		expect(AppComponent).to.haveOwnProperty("type");
-		expect(AppComponent.name).to.be.a("string");
-		expect(AppComponent.type).to.be.a("string");
-		expect(AppComponent.name).to.be.eq("GreetingComponent");
-		expect(AppComponent.type).to.be.eq("component");
+		expect(AppComponent.simpleName).toBeDefined();
+		expect(AppComponent.simpleType).toBeDefined();
+		expect(AppComponent.simpleName).toEqual("GreetingComponent");
+		expect(AppComponent.simpleType).toEqual("component");
 	});
 
 	it("should decorate class with static name and type properties that are read only", function() {
@@ -33,13 +28,15 @@ describe("@NgComponent", function() {
 			}
 		}
 
-		expect(AppComponent).to.haveOwnProperty("name");
-		expect(AppComponent).to.haveOwnProperty("type");
+		expect(AppComponent.simpleName).toBeDefined();
+		expect(AppComponent.simpleType).toBeDefined();
 		expect(function() {
-			AppComponent.name = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'name'");
+			AppComponent.simpleName = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
 		expect(function() {
-			AppComponent.type = "should throw error";
-		}).to.throw(TypeError, "Cannot assign to read only property 'type'");
+			AppComponent.simpleType = "should throw error";
+		}).toThrow(new TypeError("Attempted to assign to readonly property."));
+		expect(AppComponent.simpleName).toEqual("GreetingComponent");
+		expect(AppComponent.simpleType).toEqual("component");
 	});
 });
